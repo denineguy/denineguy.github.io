@@ -4,7 +4,7 @@
   <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-06-17T09:51:40-04:00</updated>
+  <updated>2014-06-17T09:54:44-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -35,7 +35,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Class Objects<br>An object is thought of as an instance of the class. in Ruby you can create an object or instance of the class by using the new method, as follow:</h2>
+<h2>Class Objects</h2>
+
+<p>An object is thought of as an instance of the class. in Ruby you can create an object or instance of the class by using the new method, as follow:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
