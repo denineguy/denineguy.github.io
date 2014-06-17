@@ -4,7 +4,7 @@
   <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-06-17T09:48:20-04:00</updated>
+  <updated>2014-06-17T09:51:40-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -46,7 +46,7 @@
 
 <h2>Variable Scope</h2>
 
-<p>Ruby offers 4 types of variables in Ruby</p>
+<p>Ruby offers 4 types of variables</p>
 
 <ul>
 <li><p>Local Variables: Local variable are variables that are defined in a method and not available outside of the method.  Local variables begin with a lower case letter or _.<code>local</code> or <code>_local</code></p></li>
