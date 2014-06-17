@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Riding the Rails and Searching for Gems</title>
+  <title>Riding the Rails</title>
   <meta name="author" content="Denine Guy">
 
   
@@ -21,7 +21,7 @@
   <link rel="canonical" href="http://denineguy.github.io">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Riding the Rails and Searching for Gems" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Riding the Rails" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -36,9 +36,9 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Riding the Rails and Searching for Gems</a></h1>
+  <h1><a href="/">Riding the Rails</a></h1>
   
-    <h2>My Journey Learning How to Program</h2>
+    <h2>My Journey Learning to Program</h2>
   
 </hgroup>
 
@@ -94,15 +94,15 @@
   </header>
 
 
-  <div class="entry-content"><p>Ruby is an object oriented programming language modeled around objects rather than &ldquo;actions&rdquo; and data rather than logic. Ruby allows you to define a class that provides a blueprint for the construction of similar objects.  A class defines methods (behavior) and attributes (variables) and methods get invoked in response to messages.</p>
+  <div class="entry-content"><p>Ruby is an object oriented programming language modeled around objects rather than &ldquo;actions&rdquo; and data rather than logic. Ruby allows you to define a class that provides a blueprint for the construction of similar objects.</p>
 
 <h2>What is a Class</h2>
 
-<p>A class is a way of organizing and providing a blueprint for producing objects with similar attributes and methods.  It should have a single responsibility and it purpose is to define the behavior of an object.  Ruby has several built in classes such as the String Class, Array Class, Integer Class, Hash Class and many more.  It is also possible to define and create your own classes.</p>
+<p>A class is a way of organizing and providing a blueprint for producing objects with similar attributes and methods.  It should have a single responsibility and its purpose is to define the behavior of an object.  Ruby has several built in classes such as the String Class, Array Class, Integer Class, Hash Class and many more.  Ruby also allows one to define and create your own classes.</p>
 
 <h2>Creating Classes</h2>
 
-<p>A class is defined by the keyword class, the class name, a constant, beginning with a capital letter and followed by the word end. Below is an example of the syntax</p>
+<p>A class is defined by the keyword class, the class name, a constant, beginning with a capital letter and followed by the word end. Below is an example of the syntax:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -111,39 +111,12 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Class Objects</h2>
-
-<p>An object is thought of as an instance of the class. in Ruby you can create and object/instance of the class by using the new method, as follow:</p>
+<h2>Class Objects<br>An object is thought of as an instance of the class. in Ruby you can create an object or instance of the class by using the new method, as follow:</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">girl</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Lisa&quot;</span><span class="p">)</span>
 </span><span class='line'><span class="n">boy</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Gene&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>New vs Initialize method</h2>
-
-<p>Initialize is a method of the instance that is used to boot up the object once it have been created.  New is a method of the class and is used to create the instance.  When &ldquo;new&rdquo; is called it creates an instance of the class and triggers the initalize method, which tells the object what to do as soon as it is created.   So if I call Baby.new it will trigger the initialize method and cause the Baby to cry.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
-</span><span class='line'>    <span class="vi">@asleep</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello my name is &quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">ruby</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Yukihiro&quot;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -155,8 +128,175 @@
 <li><p>Local Variables: Local variable are variables that are defined in a method and not available outside of the method.  Local variables begin with a lower case letter or _.<code>local</code> or <code>_local</code></p></li>
 <li><p>Instance Variables: Instance variables are available across methods for any particular instance or object. That means that instance variables change from object to object. Instance variables are preceded by the at sign (@) followed by the variable name. <code>@variable</code></p></li>
 <li><p>Class Variables: Class variables are available across different objects. A class variable belongs to the class and is a characteristic of a class. They are preceded by the sign @@ and are followed by the variable name. <code>@@class</code></p></li>
-<li><p>Global Variables: Class variables are not available across classes. If you want to have a single variable, which is available across classes, you need to define a global variable. The global variables are always preceded by the dollar sign ($). <code>global</code></p></li>
+<li><p>Global Variables: Class variables are not available across classes. If you want to have a single variable, which is available across classes, you need to define a global variable. The global variables are always preceded by the dollar sign ($). <code>$global</code></p></li>
 </ul>
+
+
+<h2>New vs Initialize method</h2>
+
+<p>Initialize is a method of the instance that is used to boot up the object once it has been created.  New is a method of the class and is used to create the instance.  When &ldquo;new&rdquo; is called it creates an instance of the class and triggers the initalize method, which tells the object what to do as soon as it is created.   So if I call Person.new it will trigger the initialize method and take in the person name and job and the person will automatically say Hello my name is Danielle.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="vi">@job</span> <span class="o">=</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">speak</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello my name is </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">girl</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Danielle, secretary&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Instance vs Class Methods</h2>
+
+<p>Instance methods on the other hand are methods of the instance or object. The speak method above is an example of an instance method. In my example the Instance method defines what a person does when they speak.  Class methods are declared the same way as instance methods, except that they are prefixed by self, or the class name, followed by a period. These methods are executed at the Class level and may be called without an object instance. They cannot access instance variables but do have access to class variables. Below is an example of class methods</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">Person</span><span class="o">.</span><span class="nf">find_by_name</span>
+</span><span class='line'>    <span class="c1">#do something</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is can also be written using self which is the preferred method for Ruby.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_by_age</span>
+</span><span class='line'>    <span class="c1">#do something </span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Attribute Reader Write and Accessor Methods</h2>
+
+<p>An object&rsquo;s instance variables are its attributes, which distinguish one object from other objects of the same class. It is important to be able to write to and read these attributes; doing so requires methods called attribute accessors.  We can use as attr_reader to access a variable and and attr_writer to change it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="vi">@job</span> <span class="o">=</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">name</span><span class="o">=</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#setter method, which sets the value</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">name</span>  <span class="c1"># getter method</span>
+</span><span class='line'>    <span class="vi">@name</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">job</span><span class="o">=</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#setter method, which sets the value</span>
+</span><span class='line'>    <span class="vi">@job</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This can also be written more concisely with attr_reader and attr_writer methods which automatically creates the setter and getter methods respectively.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="kp">attr_writer</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:job</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="vi">@job</span> <span class="o">=</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When there is a variable that is both an attr_reader and attr_writer it can be written even more succinctly with an attr_accessor method as follows.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:name</span>
+</span><span class='line'>  <span class="kp">attr_writer</span>  <span class="ss">:job</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="vi">@job</span> <span class="o">=</span> <span class="n">job</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Inheritance</h2>
+
+<p>Inheritance is the process by which one class takes on the attributes and methods of another class, the parent class.  Inheritance creates a relationship such that if one object cannot respond to a message it delegates that message to another object.  It should be noted that Ruby does not support multiple inheritance and so a class in Ruby can have only one base or parent class. The The syntax for inheritance is the Derived class, the new class which inherits from the base or parent class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">DerivedClass</span> <span class="o">&lt;</span> <span class="no">BaseClass</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
