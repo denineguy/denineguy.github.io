@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Adventures in Ruby on Rails]]></title>
+  <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-06-04T08:44:48-04:00</updated>
+  <updated>2014-06-16T17:09:30-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Object Oriented Programming - Ruby Classes and Objects]]></title>
+    <link href="http://denineguy.github.io/blog/2014/06/16/post-object-oriented-programming-ruby-classes-and-objects/"/>
+    <updated>2014-06-16T15:37:03-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/06/16/post-object-oriented-programming-ruby-classes-and-objects</id>
+    <content type="html"><![CDATA[<p>Ruby is an object oriented programming language modeled around objects rather than &ldquo;actions&rdquo; and data rather than logic. Ruby allows you to define a class that provides a blueprint for the construction of similar objects.  A class defines methods (behavior) and attributes (variables) and methods get invoked in response to messages.</p>
+
+<h2>What is a Class</h2>
+
+<p>A class is a way of organizing and providing a blueprint for producing objects with similar attributes and methods.  It should have a single responsibility and it purpose is to define the behavior of an object.  Ruby has several built in classes such as the String Class, Array Class, Integer Class, Hash Class and many more.  It is also possible to define and create your own classes.</p>
+
+<h2>Creating Classes</h2>
+
+<p>A class is defined by the keyword class, the class name, a constant, beginning with a capital letter and followed by the word end. Below is an example of the syntax</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Class Objects</h2>
+
+<p>An object is thought of as an instance of the class. in Ruby you can create and object/instance of the class by using the new method, as follow:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">girl</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Lisa&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">boy</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Gene&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>New vs Initialize method</h2>
+
+<p>Initialize is a method of the instance that is used to boot up the object once it have been created.  New is a method of the class and is used to create the instance.  When &ldquo;new&rdquo; is called it creates an instance of the class and triggers the initalize method, which tells the object what to do as soon as it is created.   So if I call Baby.new it will trigger the initialize method and cause the Baby to cry.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="vi">@asleep</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hello my name is &quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ruby</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Yukihiro&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Variable Scope</h2>
+
+<p>Ruby offers 4 types of variables in Ruby</p>
+
+<ul>
+<li><p>Local Variables: Local variable are variables that are defined in a method and not available outside of the method.  Local variables begin with a lower case letter or _.<code>local</code> or <code>_local</code></p></li>
+<li><p>Instance Variables: Instance variables are available across methods for any particular instance or object. That means that instance variables change from object to object. Instance variables are preceded by the at sign (@) followed by the variable name. <code>@variable</code></p></li>
+<li><p>Class Variables: Class variables are available across different objects. A class variable belongs to the class and is a characteristic of a class. They are preceded by the sign @@ and are followed by the variable name. <code>@@class</code></p></li>
+<li><p>Global Variables: Class variables are not available across classes. If you want to have a single variable, which is available across classes, you need to define a global variable. The global variables are always preceded by the dollar sign ($). <code>global</code></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Post on Octopress]]></title>
