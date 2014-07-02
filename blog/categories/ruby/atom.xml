@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-07-02T09:23:21-04:00</updated>
+  <updated>2014-07-02T09:29:30-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Generating Passwords]]></title>
+    <title type="html"><![CDATA[Password Generating App With Sinatra]]></title>
     <link href="http://denineguy.github.io/blog/2014/07/02/generating-passwords/"/>
     <updated>2014-07-02T00:08:45-04:00</updated>
     <id>http://denineguy.github.io/blog/2014/07/02/generating-passwords</id>
-    <content type="html"><![CDATA[<h2>Random Password Generator</h2>
+    <content type="html"><![CDATA[<h2>Web Applications with Sinatra</h2>
 
 <p>Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.</p>
 
