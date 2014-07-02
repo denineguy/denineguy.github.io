@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:
 
-Sitemap: http://denineguy.github.io/sitemap.xml 
+Sitemap: http://denineguy.github.io/sitemap.xml
