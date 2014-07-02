@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "generating passwords"
+title: "password generating app with sinatra"
 date: 2014-07-02 00:08:45 -0400
 comments: true
 categories: rails sinatra, ruby
 languages: ruby
 ---
-##Random Password Generator
+##Web Applications with Sinatra
 
 Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.
 
