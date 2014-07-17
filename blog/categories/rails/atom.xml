@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Rails, | Riding the Rails and Searching for Gems]]></title>
+  <title><![CDATA[Category: Rails | Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-07-17T09:09:07-04:00</updated>
+  <updated>2014-07-17T09:10:54-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -119,6 +119,146 @@
 <li><a href="http://www.thetoptens.com/ruby-rails-development-companies/" title="Title">Top 10 Ruby on Rails Development Companies</a></li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Password Generating App With Sinatra]]></title>
+    <link href="http://denineguy.github.io/blog/2014/07/02/generating-passwords/"/>
+    <updated>2014-07-02T00:08:45-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/07/02/generating-passwords</id>
+    <content type="html"><![CDATA[<h2>Web Applications with Sinatra</h2>
+
+<p>Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.</p>
+
+<p>Unlike Ruby on Rails, Sinatra does not follow the typical model-view-controller pattern.  Instead it focuses on quickly creating web applications in Ruby with minimal effort.  After further reading, I discovered that Sinatra is great for creating small apps and is ideal if your controller structure can fit into one or two pages of code. With this in mind, I decided to set it out and try to create my own app.</p>
+
+<h2>My Hatred for Passwords</h2>
+
+<p>I love the internet, always have and always will, but there is one thing in particular that has become increasingly annoying to me and that is the need for passwords on nearly every site.  I mean it has gotten so bad that some companies don’t even let you peruse their site to figure out what they are all about without having to sign in. We know nothing about them but to learn more they have to capture data on us.  I personally think this should be illegal but that is neither here not there.  The reality of the situation is that I can’t keep up with these passwords anymore.  It was so bad at one point that I literally had the same password for every site.  YES I know that is bad, but I just couldn’t think of any better passwords.  I have since started changing them, but am running out of ideas for passwords.  Since it doesn’t seem like the need for passwords on websites are going away anytime soon, I decided to see if I could create a random password generator for myself&hellip;  that is until I figure out a better technology to eliminate the need for passwords altogether.</p>
+
+<p>Please note that my password generator does not produce the most secure passwords at this time.  This is a work in progress and I will continue to develop this app.</p>
+
+<h2>Word-Generator Form</h2>
+
+<p>```html
+<form action='/password' method="POST"></p>
+
+<h3>Please enter two words that are at least 5 letters long</h3>
+
+
+<p>  <p></p>
+
+<pre><code>&lt;label for="first_word"&gt;First Word:&lt;/label&gt;
+&lt;input id="first_word" type="text" name="password[first_word]"&gt; &lt;/br&gt; 
+&lt;label for="second_word"&gt;Second Word:&lt;/label&gt;
+&lt;input id="second_word" type="text" name="password[second_word]"&gt;
+</code></pre>
+
+<p>  </p>
+  <input type="submit" value="submit"/>
+</form>
+```</p>
+
+<p>First things I didn’t want an extremly abstract password that I wouldn’t remember.  I thought if I set two words that I could manipulate, maybe I will rememeber them a little better. Above is a form that would take in two words of my choice.</p>
+
+<h2>Class Password</h2>
+
+<p>```ruby
+require &lsquo;sinatra&rsquo;
+class Password</p>
+
+<p>  attr_accessor :first_word, :second_word, :password_generator</p>
+
+<p>  def initialize</p>
+
+<pre><code>@generator = []
+</code></pre>
+
+<p>  end</p>
+
+<p>  def word1</p>
+
+<pre><code>word_split = first_word.split("")
+scramble = word_split.permutation(rand(2..4)).to_a[rand(30)]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def word2</p>
+
+<pre><code>word_split = second_word.split("")
+scramble = word_split.permutation(rand(2..3)).to_a[rand(20)]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def password_generator</p>
+
+<pre><code>@generator &lt;&lt; [word1, rand(10), word2, "_", rand(20)].join
+@generator[0]
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```
+I then created a Password Class that takes in two words and permutates them. I randomly select a permutation of 2-4 characters for the first word out of several different permutations, and 1-3 characters for the second word.   I then join the two words with random numbers, and a non-word character, which will ultimately generate my password.</p>
+
+<h2>App.rb &ndash; Routes</h2>
+
+<p>```ruby
+module PasswordSinatra
+  class App &lt; Sinatra::Base</p>
+
+<pre><code>get '/' do
+  erb :index
+end
+
+get '/word_generator' do
+   erb :word_generator 
+end
+
+post '/password' do
+  @password = Password.new
+  @password.first_word = params[:password][:first_word]
+  @password.second_word = params[:password][:second_word]
+  @password.password_generator = params[:password][:password_generator]
+
+  erb :password
+end
+
+get '/password' do
+  erb :word_generator
+end
+</code></pre>
+
+<p>  end
+end
+```
+This code above shows my routes, the HTTP method (GET or POST) with the corresponding URL destination when a request is made to the server.  The root goes to my index page.  When the link on the index page is clicked it takes the user to a word generator form page, where the user has to enter two words and click submit. This will ultimately end up on the password page which will show them their newly created password. If a user does not like that password they can either refresh page to generate a new password permutation or go back to the word_generator from and submit two new words to create an entirely new password.</p>
+
+<h2>Screenshots of the Password Generator Application</h2>
+
+<h4>Index Page</h4>
+
+<p><img src="/images/index_page.png" title="Password Generator Index Page" alt="index page" /></p>
+
+<h4>Word Generator Form Page</h4>
+
+<p><img src="/images/word_generator.png" title="Word Generator Form Page" alt="word generator form page" /></p>
+
+<h4>Password Page</h4>
+
+<p><img src="/images/password_generator.png" title="Password Generator Page" alt="password generator page" /></p>
+
+<p>Voila and there it is my very own randomly generated password. <em> pp7sar_10 </em></p>
+
+<p>Well this is my app.  I will continue to improve this app and hope to have it deployed shortly.</p>
+
+<h3>References:</h3>
+
+<p>Here is a great blog post to learn when to Rails vs Sinatra: <a href="http://www.sitepoint.com/rails-or-sinatra-the-best-of-both-worlds/" title="Title">Rails or Sinatra: The Best of Both Worlds</a>.</p>
 ]]></content>
   </entry>
   
