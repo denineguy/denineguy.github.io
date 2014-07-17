@@ -4,7 +4,7 @@
   <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-07-02T09:29:30-04:00</updated>
+  <updated>2014-07-17T08:54:33-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Industry Trends and Top Companies Using Ruby on Rails]]></title>
+    <link href="http://denineguy.github.io/blog/2014/07/17/industry-trends-and-top-companies-using-ruby-on-rails/"/>
+    <updated>2014-07-17T01:40:25-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/07/17/industry-trends-and-top-companies-using-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>Having spent the last 7 weeks learning Ruby and Ruby on Rails I am slowly beginning to understand its magic and how quickly a web application can be built using Rails.  With this in mind I wanted to better understand why others think this web-application framework is so hot and more importantly I wanted to know what is the growth trend for Ruby on Rails and what companies are using this technology for web applications.  Hey let’s be serious I want to ensure the prospects of finding a job after learning this are feasible.</p>
+
+<h2>Why Ruby on Rails is Hot</h2>
+
+<p>Ruby on Rails (RoR) is an open source web application framework written with the Ruby Programming language. It is said that the speed and agility with which applications can be built with Ruby on Rails, results in increased productivity and company growth.  The versatility and speed of Ruby makes it possible to build custom software for app development, allowing businesses have to differentiate themselves, while also creating functional software that makes data collection, visualization and exchange fast and efficient.  Lastly, Ruby on Rails is known to be simpler and cheaper than other traditional web development processes.</p>
+
+<h2>Website Usage and Industry Trends</h2>
+
+<p>All companies ranging from startups to large multinational corporation have begun to realize how fast and effective building web apps with Ruby on Rails is.  As such more companies are using the web frameworking.  According to one estimate there are, over <a href="http://trends.builtwith.com/framework/Ruby-on-Rails" title="Title">600,000</a> websites are running on Ruby on Rails.  Over the past year the number of sites running on Ruby on Rails has increased by approximately 20%.</p>
+
+<h4>Websites Using Rails: Growth Trend</h4>
+
+<p><img src="http://denineguy.github.io/images/growth_trend_rails.png" title="Yearly Growth trend for websites using Ruby on Rails" alt="Websites Using Rails: Growth Trend" /></p>
+
+<p>The below image shows the Top Million websites using Ruby on Rails, broken down into segments. (Top 10k sites, Top 100k site and Top Million sites).  There are approximately 230 sites of the top 10k sites that are currently using Ruby on Rails</p>
+
+<h4>Trend for Top Million Websites Using Ruby on Rails</h4>
+
+<p><img src="http://denineguy.github.io/images/number_top_sites_rails.png" title="Growth trend for top websites using Ruby on Rails" alt="Top Websites Using Rails: Growth Trend" /></p>
+
+<p>Ruby on Rails usage spans different industries from business to health with business and shopping being the dominant verticals currently utilizing Ruby on Rails. The chart below shows a visual representation of that.</p>
+
+<h4>Website Verticals</h4>
+
+<p><img src="http://denineguy.github.io/images/industry_verticals_rails.png" title="Ruby on Rails Website Verticals" alt="Ruby on Rails Website Verticals" /></p>
+
+<h2>Top Companies</h2>
+
+<p>After discovering that there are a large amount of companies who have adopted Ruby on Rails, I became intrigued and wanted to see what companies were either built with Ruby on Rails and/or are currently using Ruby on Rails.</p>
+
+<ol>
+<li><a href="http://www.twitter.com" title="Title">Twitter</a> – Twitter doesn’t use RoR anymore but it was built using Rails. Social Media Site</li>
+<li><a href="http://www.shopify.com/" title="Title">Shopify</a> – A platform that let’s you build your own online store</li>
+<li><a href="http://www.crunchbase.com/" title="Title">Crunchbase</a> – A free database of technology companies, people, investors that anyone can edit.</li>
+<li><a href="http://www.groupon.com/" title="Title">Groupon</a> – A global leader of commerce, offering daily deals</li>
+<li><a href="http://www.bloomberg.com/" title="Title">Bloomberg</a> –The global business and financial information and news leader.</li>
+<li><a href="https://www.indiegogo.com/" title="Title">Indiegogo</a> – a crowd-funded platform for film, music, technology, charity, gaming etc.</li>
+<li><a href="https://www.airbnb.com/" title="Title">Airbnb</a> – is a community marketplace for people to list, discover, and book unique accomodations  around the world.</li>
+<li><a href="https://soundcloud.com/" title="Title">Soundcloud</a> &ndash; SoundCloud is an online audio distribution platform based in Berlin, Germany that enables its users to upload, record, promote and share their originally-created sounds.</li>
+<li><a href="https://squareup.com/" title="Title">Square</a> – offers and easy way to payment solution, using a white square credit card readers that you can plug into your Android, iPhone or iPad</li>
+<li><a href="https://www.heroku.com/" title="Title">Heroku</a>&ndash; a cloud platform as a service supporting several programming languages.</li>
+<li><a href="http://www.zendesk.com/" title="Title">Zendesk</a> &ndash; is the leader for integrated on-demand customer support portal solution, based on the latest Web 2.0 technologies and design philosophies</li>
+<li><a href="http://www.hulu.com/" title="Title">Hulu</a> – is an online video service that offers a selection of hit shows, clips and movies.</li>
+<li><a href="https://github.com/" title="Title">Github</a> &ndash; GitHub is a Git repository web-based hosting service which offers all of the functionality of Git as well as adding many of it&rsquo;s own features.</li>
+<li><a href="http://www.slideshare.net/" title="Title">Slideshare</a> &ndash; Offers users the ability to upload and share publicly or privately PowerPoint presentations, Word documents and Adobe PDF Portfolios</li>
+<li><a href="https://www.livingsocial.com/" title="Title">Living Social</a> &ndash; features deals on the best things to do in your city, including restaurants, spas, travel, and more, with discounts up to 80% off.</li>
+<li><a href="http://www.scribd.com/" title="Title">Scribd</a> &ndash; Unlimited access to 400000+ books with Scribd that can be tead on your iPad, iPhone, Android phone &amp; tablet, or web browser</li>
+<li><a href="https://basecamp.com/" title="Title">Basecamp</a> – is a web-based project management tool.</li>
+</ol>
+
+
+<p>To learn about more companies using Ruby on Rails visit <a href="http://trends.builtwith.com/framework/Ruby-on-Rails" title="Title">Builtwith</a>.</p>
+
+<p>There are also a number of Ruby on Rails Development companies, such as <a href="http://thoughtbot.com/" title="Title">Thoughtbot</a>. For a list of top Ruby on Rails Development companies click <a href="http://www.thetoptens.com/ruby-rails-development-companies/" title="Title">here</a>.</p>
+
+<h2>Job Trends and Industry Growth</h2>
+
+<p>Based on information from indeed the growth trends for Ruby on Rails developers are very promising. Ruby on Rails developer jobs are promising and the job market will continue to show a high demand for Rails developers.  As more and more companies understand the low-upfront cost and overall cost savings along with ease and speed of development it can be predicted that more and more companies will begin to use Ruby on Rails.</p>
+
+<div style="width:540px">
+<a href="http://www.indeed.com/jobtrends?q=Ruby-on-rails" title="Ruby-on-rails Job Trends">
+<img width="540" height="300" src="http://www.indeed.com/trendgraph/jobgraph.png?q=Ruby-on-rails" border="0" alt="Ruby-on-rails Job Trends graph">
+</a>
+<table width="100%" cellpadding="6" cellspacing="0" border="0" style="font-size:80%"><tr>
+<td><a href="http://www.indeed.com/jobtrends?q=Ruby-on-rails">Ruby-on-rails Job Trends</a></td>
+<td align="right"><a href="http://www.indeed.com/jobs?q=Ruby-on-rails">Ruby-on-rails jobs</a></td>
+</tr></table>
+</div>
+
+
+
+
+<br>
+
+
+<br>
+
+
+<h3>More Resources</h3>
+
+<ul>
+<li><a href="http://trends.builtwith.com/framework/Ruby-on-Rails" title="Title">Builtwith</a></li>
+<li><a href="http://www.thetoptens.com/ruby-rails-development-companies/" title="Title">Top 10 Ruby on Rails Development Companies</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Password Generating App With Sinatra]]></title>
