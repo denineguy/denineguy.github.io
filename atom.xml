@@ -4,7 +4,7 @@
   <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-07-17T10:31:35-04:00</updated>
+  <updated>2014-09-12T23:13:16-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -14,11 +14,150 @@
 
   
   <entry>
+    <title type="html"><![CDATA[The Greedy Method - Solving the Apple Stock Algorithm]]></title>
+    <link href="http://denineguy.github.io/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm/"/>
+    <updated>2014-09-11T17:30:27-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm</id>
+    <content type="html"><![CDATA[<p>Last week I had the pleasure of attending a Women Who Code NYC event focusing on Algorithms &amp;Interview Prep. The meetup provided a lot of great resources for interview prep and gave us all a chance to work on our whiteboarding skills. One of the questions we came across was regarding   Apple Stock.</p>
+
+<!-- more -->
+
+
+<h2>Apple Stock Question</h2>
+
+<p>I have an array of stock_prices where the keys are the number of minutes into the day (starting with midnight) and the values are the price of Apple stock at that time.  For example, the stock cost $500 at 1am, so stockPricesYesterday[60] = 500.
+Write an efficient algorithm for computing the best profit I could have made from 1 purchase and 1 sale of an Apple stock yesterday.</p>
+
+<h2>First Solution</h2>
+
+<p>My first attempt at solving this was the brute force way, which iterates through all of the possible solutions.  While this will give me the answer the issue is that it there are n<sup>2</sup> combinations (where n represents each time and stock price pair, for the day). This result will take O(n<sup>2</sup>) time to get to the solution. Below is an example of my solution.</p>
+
+<figure class='code'><figcaption><span>Brute Force Apple Stock Solution</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">StockMarket</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">apple_stock</span><span class="p">(</span><span class="n">stock_prices</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">max_profit</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">stock_prices</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">buy_price</span><span class="p">,</span> <span class="n">buy_time</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">stock_prices</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">sell_price</span><span class="p">,</span> <span class="n">sell_time</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">profit</span> <span class="o">=</span> <span class="n">sell_price</span> <span class="o">-</span> <span class="n">buy_price</span>
+</span><span class='line'>          <span class="k">if</span> <span class="n">buy_time</span> <span class="o">&lt;</span> <span class="n">sell_time</span> <span class="o">&amp;&amp;</span> <span class="n">profit</span> <span class="o">&gt;</span> <span class="n">max_profit</span>
+</span><span class='line'>            <span class="n">max_profit</span> <span class="o">=</span> <span class="n">profit</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>        <span class="k">end</span> <span class="n">x</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">max_profit</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Second Solution &ndash; The Greedy Method</h2>
+
+<p>My next solution was iterating through the stock prices only once to look for the optimal solution.  This is done using the greedy method. A greedy algorithm iterates through the problem space taking the optimal solution &ldquo;so far,&rdquo; until it reaches the end. This method leads to only iterating through the problem n times and gives a solution that is O(n) times fast.</p>
+
+<figure class='code'><figcaption><span>Greedy Method Apple Stock Solution</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StockMarket</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">apple_stock</span><span class="p">(</span><span class="n">stock_prices</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">max_profit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">min_price</span> <span class="o">=</span> <span class="n">stock_prices</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="mi">0</span><span class="o">.</span><span class="n">upto</span><span class="p">(</span><span class="n">stock_prices</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">time</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">current_price</span> <span class="o">=</span> <span class="n">stock_prices</span><span class="o">[</span><span class="n">time</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">min_price</span> <span class="o">=</span> <span class="n">current_price</span>  <span class="k">if</span> <span class="n">current_price</span> <span class="o">&lt;</span> <span class="n">min_price</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">current_profit</span> <span class="o">=</span> <span class="n">current_price</span> <span class="o">-</span> <span class="n">min_price</span>
+</span><span class='line'>      <span class="n">max_profit</span> <span class="o">=</span> <span class="n">current_profit</span> <span class="k">if</span> <span class="n">current_profit</span> <span class="o">&gt;</span> <span class="n">max_profit</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">max_profit</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>More About the Greedy Method</h2>
+
+<p>In general, greedy algorithms have five components:</p>
+
+<ol>
+<li>A candidate set, from which a solution is created</li>
+<li>A selection function, which chooses the best candidate to be added to the solution</li>
+<li>A feasibility function, that is used to determine if a candidate can be used to contribute to a solution</li>
+<li>An objective function, which assigns a value to a solution, or a partial solution, and</li>
+<li>A solution function, which will indicate when we have discovered a complete solution</li>
+</ol>
+
+
+<p>Greedy algorithms help find the optimal solution for some mathematical problems, but not all. This algorithm works best on problems that have two properties:</p>
+
+<h3>Greedy choice property</h3>
+
+<p>We can make whatever choice seems best at the moment and then solve the subproblems that
+arise later. The choice made by a greedy algorithm may depend on choices made so far but
+not on future choices or all the solutions to the subproblem. It iteratively makes one
+greedy choice after another, reducing each given problem into a smaller one. In other words,
+a greedy algorithm never reconsiders its choices.</p>
+
+<h3>Optimal substructure</h3>
+
+<p>&ldquo;A problem exhibits optimal substructure if an optimal solution to the problem contains
+ptimal solutions to the sub-problems.&rdquo;</p>
+
+<p>Below are a list of more resources to prepare for interviews:</p>
+
+<ul>
+<li><a href="http://www.ocf.berkeley.edu/~kelu/interviews/questions.html">http://www.ocf.berkeley.edu/~kelu/interviews/questions.html</a></li>
+<li><a href="http://katemats.com/interview-questions/">http://katemats.com/interview-questions/</a></li>
+<li><a href="http://meetupresources.herokuapp.com/index.html">http://meetupresources.herokuapp.com/index.html</a></li>
+<li><a href="http://codingforinterviews.com/practice">http://codingforinterviews.com/practice</a></li>
+<li><a href="https://www.interviewcake.com/">https://www.interviewcake.com/</a></li>
+</ul>
+
+
+<p>Learn more about <a href="https://www.womenwhocode.com/" title="Women Who Code website">Women Who Code</a> and if you are in NYC come checkout a meetup and <a href="http://www.meetup.com/WomenWhoCodeNYC/" title="meetup site">Women Who Code NYC</a>.  The next Algorithm and Interview Prep session is sched</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Industry Trends and Top Companies Using Ruby on Rails]]></title>
     <link href="http://denineguy.github.io/blog/2014/07/17/industry-trends-and-top-companies-using-ruby-on-rails/"/>
     <updated>2014-07-17T01:40:25-04:00</updated>
     <id>http://denineguy.github.io/blog/2014/07/17/industry-trends-and-top-companies-using-ruby-on-rails</id>
     <content type="html"><![CDATA[<p>Having spent the last 7 weeks learning Ruby and Ruby on Rails I am slowly beginning to understand its magic and how quickly a web application can be built using Rails.  With this in mind I wanted to better understand why others think this web-application framework is so hot and more importantly I wanted to know what is the growth trend for Ruby on Rails and what companies are using this technology for web applications.  Hey let’s be serious I want to ensure the prospects of finding a job after learning this are feasible.</p>
+
+<!-- more -->
+
 
 <h2>Why Ruby on Rails is Hot</h2>
 
@@ -131,6 +270,9 @@
     <content type="html"><![CDATA[<h2>Web Applications with Sinatra</h2>
 
 <p>Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.</p>
+
+<!-- more -->
+
 
 <p>Unlike Ruby on Rails, Sinatra does not follow the typical model-view-controller pattern.  Instead it focuses on quickly creating web applications in Ruby with minimal effort.  After further reading, I discovered that Sinatra is great for creating small apps and is ideal if your controller structure can fit into one or two pages of code. With this in mind, I decided to set it out and try to create my own app.</p>
 
@@ -313,6 +455,9 @@
     <updated>2014-06-16T15:37:03-04:00</updated>
     <id>http://denineguy.github.io/blog/2014/06/16/post-object-oriented-programming-ruby-classes-and-objects</id>
     <content type="html"><![CDATA[<p>Ruby is an object oriented programming language modeled around objects rather than &ldquo;actions&rdquo; and data rather than logic. Ruby allows you to define a class that provides a blueprint for the construction of similar objects.</p>
+
+<!-- more -->
+
 
 <h2>What is a Class</h2>
 
@@ -518,15 +663,6 @@
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My First Post on Octopress]]></title>
-    <link href="http://denineguy.github.io/blog/2014/06/04/my-first-post-on-octopress/"/>
-    <updated>2014-06-04T05:56:30-04:00</updated>
-    <id>http://denineguy.github.io/blog/2014/06/04/my-first-post-on-octopress</id>
-    <content type="html"><![CDATA[<p>Hello, World</p>
 ]]></content>
   </entry>
   

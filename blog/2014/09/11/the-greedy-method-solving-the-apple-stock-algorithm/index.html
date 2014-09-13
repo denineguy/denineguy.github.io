@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Greedy Method - Solving the Apple Stock Algorithm - Riding the Rails and Searching for Gems</title>
+  <meta name="author" content="Denine Guy">
+
+  
+  <meta name="description" content="Last week I had the pleasure of attending a Women Who Code NYC event focusing on Algorithms &amp;Interview Prep. The meetup provided a lot of great &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://denineguy.github.io/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Riding the Rails and Searching for Gems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Riding the Rails and Searching for Gems</a></h1>
+  
+    <h2>My Journey Learning to Program</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:denineguy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Greedy Method - Solving the Apple Stock Algorithm</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-11T17:30:27-04:00" pubdate data-updated="true">Sep 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last week I had the pleasure of attending a Women Who Code NYC event focusing on Algorithms &amp;Interview Prep. The meetup provided a lot of great resources for interview prep and gave us all a chance to work on our whiteboarding skills. One of the questions we came across was regarding   Apple Stock.</p>
+
+<!-- more -->
+
+
+<h2>Apple Stock Question</h2>
+
+<p>I have an array of stock_prices where the keys are the number of minutes into the day (starting with midnight) and the values are the price of Apple stock at that time.  For example, the stock cost $500 at 1am, so stockPricesYesterday[60] = 500.
+Write an efficient algorithm for computing the best profit I could have made from 1 purchase and 1 sale of an Apple stock yesterday.</p>
+
+<h2>First Solution</h2>
+
+<p>My first attempt at solving this was the brute force way, which iterates through all of the possible solutions.  While this will give me the answer the issue is that it there are n<sup>2</sup> combinations (where n represents each time and stock price pair, for the day). This result will take O(n<sup>2</sup>) time to get to the solution. Below is an example of my solution.</p>
+
+<figure class='code'><figcaption><span>Brute Force Apple Stock Solution</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">StockMarket</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">apple_stock</span><span class="p">(</span><span class="n">stock_prices</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">max_profit</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">stock_prices</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">buy_price</span><span class="p">,</span> <span class="n">buy_time</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">stock_prices</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">sell_price</span><span class="p">,</span> <span class="n">sell_time</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">profit</span> <span class="o">=</span> <span class="n">sell_price</span> <span class="o">-</span> <span class="n">buy_price</span>
+</span><span class='line'>          <span class="k">if</span> <span class="n">buy_time</span> <span class="o">&lt;</span> <span class="n">sell_time</span> <span class="o">&amp;&amp;</span> <span class="n">profit</span> <span class="o">&gt;</span> <span class="n">max_profit</span>
+</span><span class='line'>            <span class="n">max_profit</span> <span class="o">=</span> <span class="n">profit</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>        <span class="k">end</span> <span class="n">x</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">max_profit</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Second Solution &ndash; The Greedy Method</h2>
+
+<p>My next solution was iterating through the stock prices only once to look for the optimal solution.  This is done using the greedy method. A greedy algorithm iterates through the problem space taking the optimal solution &ldquo;so far,&rdquo; until it reaches the end. This method leads to only iterating through the problem n times and gives a solution that is O(n) times fast.</p>
+
+<figure class='code'><figcaption><span>Greedy Method Apple Stock Solution</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StockMarket</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">apple_stock</span><span class="p">(</span><span class="n">stock_prices</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">max_profit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">min_price</span> <span class="o">=</span> <span class="n">stock_prices</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="mi">0</span><span class="o">.</span><span class="n">upto</span><span class="p">(</span><span class="n">stock_prices</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">time</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">current_price</span> <span class="o">=</span> <span class="n">stock_prices</span><span class="o">[</span><span class="n">time</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">min_price</span> <span class="o">=</span> <span class="n">current_price</span>  <span class="k">if</span> <span class="n">current_price</span> <span class="o">&lt;</span> <span class="n">min_price</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">current_profit</span> <span class="o">=</span> <span class="n">current_price</span> <span class="o">-</span> <span class="n">min_price</span>
+</span><span class='line'>      <span class="n">max_profit</span> <span class="o">=</span> <span class="n">current_profit</span> <span class="k">if</span> <span class="n">current_profit</span> <span class="o">&gt;</span> <span class="n">max_profit</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">max_profit</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>More About the Greedy Method</h2>
+
+<p>In general, greedy algorithms have five components:</p>
+
+<ol>
+<li>A candidate set, from which a solution is created</li>
+<li>A selection function, which chooses the best candidate to be added to the solution</li>
+<li>A feasibility function, that is used to determine if a candidate can be used to contribute to a solution</li>
+<li>An objective function, which assigns a value to a solution, or a partial solution, and</li>
+<li>A solution function, which will indicate when we have discovered a complete solution</li>
+</ol>
+
+
+<p>Greedy algorithms help find the optimal solution for some mathematical problems, but not all. This algorithm works best on problems that have two properties:</p>
+
+<h3>Greedy choice property</h3>
+
+<p>We can make whatever choice seems best at the moment and then solve the subproblems that
+arise later. The choice made by a greedy algorithm may depend on choices made so far but
+not on future choices or all the solutions to the subproblem. It iteratively makes one
+greedy choice after another, reducing each given problem into a smaller one. In other words,
+a greedy algorithm never reconsiders its choices.</p>
+
+<h3>Optimal substructure</h3>
+
+<p>&ldquo;A problem exhibits optimal substructure if an optimal solution to the problem contains
+ptimal solutions to the sub-problems.&rdquo;</p>
+
+<p>Below are a list of more resources to prepare for interviews:</p>
+
+<ul>
+<li><a href="http://www.ocf.berkeley.edu/~kelu/interviews/questions.html">http://www.ocf.berkeley.edu/~kelu/interviews/questions.html</a></li>
+<li><a href="http://katemats.com/interview-questions/">http://katemats.com/interview-questions/</a></li>
+<li><a href="http://meetupresources.herokuapp.com/index.html">http://meetupresources.herokuapp.com/index.html</a></li>
+<li><a href="http://codingforinterviews.com/practice">http://codingforinterviews.com/practice</a></li>
+<li><a href="https://www.interviewcake.com/">https://www.interviewcake.com/</a></li>
+</ul>
+
+
+<p>Learn more about <a href="https://www.womenwhocode.com/" title="Women Who Code website">Women Who Code</a> and if you are in NYC come checkout a meetup and <a href="http://www.meetup.com/WomenWhoCodeNYC/" title="meetup site">Women Who Code NYC</a>.  The next Algorithm and Interview Prep session is sched</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Authored by <span class="fn">Denine Guy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-11T17:30:27-04:00" pubdate data-updated="true">Sep 11<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithms/'>algorithms</a>, <a class='category' href='/blog/categories/greedy/'>greedy</a>, <a class='category' href='/blog/categories/method/'>method</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://denineguy.github.io/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm/" data-via="" data-counturl="http://denineguy.github.io/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/07/17/industry-trends-and-top-companies-using-ruby-on-rails/" title="Previous Post: Industry Trends and Top Companies using Ruby on Rails">&laquo; Industry Trends and Top Companies using Ruby on Rails</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Denine Guy -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

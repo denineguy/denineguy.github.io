@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Sinatra, | Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/blog/categories/sinatra/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-07-17T10:31:35-04:00</updated>
+  <updated>2014-09-12T23:13:16-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<h2>Web Applications with Sinatra</h2>
 
 <p>Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.</p>
+
+<!-- more -->
+
 
 <p>Unlike Ruby on Rails, Sinatra does not follow the typical model-view-controller pattern.  Instead it focuses on quickly creating web applications in Ruby with minimal effort.  After further reading, I discovered that Sinatra is great for creating small apps and is ideal if your controller structure can fit into one or two pages of code. With this in mind, I decided to set it out and try to create my own app.</p>
 
