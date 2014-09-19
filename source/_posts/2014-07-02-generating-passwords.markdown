@@ -9,7 +9,7 @@ languages: ruby
 ##Web Applications with Sinatra
 
 Over the past week, at The Flatiron School we have been learning about Rack and creating web applications using Sinatra.  Sinatra is a free open source software web application library, that is a domain-specific language written in Ruby, and is dependent on the Rack web service interface.
-
+<!-- more -->
 Unlike Ruby on Rails, Sinatra does not follow the typical model-view-controller pattern.  Instead it focuses on quickly creating web applications in Ruby with minimal effort.  After further reading, I discovered that Sinatra is great for creating small apps and is ideal if your controller structure can fit into one or two pages of code. With this in mind, I decided to set it out and try to create my own app.
 
 ## My Hatred for Passwords

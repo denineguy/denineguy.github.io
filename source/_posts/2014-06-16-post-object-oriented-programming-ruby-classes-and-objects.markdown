@@ -9,7 +9,7 @@ tags: object oriented programming, classes and objects
 ---
 
 Ruby is an object oriented programming language modeled around objects rather than "actions" and data rather than logic. Ruby allows you to define a class that provides a blueprint for the construction of similar objects.
-
+<!-- more -->
 ## What is a Class
 A class is a way of organizing and providing a blueprint for producing objects with similar attributes and methods.  It should have a single responsibility and its purpose is to define the behavior of an object.  Ruby has several built in classes such as the String Class, Array Class, Integer Class, Hash Class and many more.  Ruby also allows one to define and create your own classes.
 
