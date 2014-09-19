@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How Does the Internet Work - Riding the Rails and Searching for Gems</title>
+  <meta name="author" content="Denine Guy">
+
+  
+  <meta name="description" content="This week I was asked a question that kind of stumped me. How does the Internet work? I had an idea of how it works, but I didn&rsquo;t know the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://denineguy.github.io/blog/2014/09/19/how-does-the-internet-work">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Riding the Rails and Searching for Gems" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Riding the Rails and Searching for Gems</a></h1>
+  
+    <h2>My Journey Learning to Program</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:denineguy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How Does the Internet Work</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-19T15:42:12-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This week I was asked a question that kind of stumped me.  How does the Internet work?  I had an idea of how it works, but I didn&rsquo;t know the correct terminology to correctly articulate.  It got me thinking, how does the Internet actually work? In this post I attempt to explain how it works at it&rsquo;s most basic level</p>
+
+<!-- more -->
+
+
+<h2>What is the Internet</h2>
+
+<p>The Internet is essentially a wire that is actually buried underground.  It may be fiber optic wire cables or sometimes beamed to satellites or cell phone networks but it is essentially a wire. The Internet, as I am sure you all know, is useful because two computers connected to this wire can communicate with each other.  A server is a computer connected directly to the Internet and a web page is essentially a file that is stored on that server’s hard drive.</p>
+
+<h2>How to render a Webpage</h2>
+
+<p>So say you are on your computer and you want to go to the google.com webpage.  You would type in www.google.com and voila a webpage would render&hellip;but how does that happen? Well your computer is a client because it does not directly connect to the Internet.  It connects to the Internet through and Internet Service Provider, using DSL. To get to google.com webpage, which is and ISP and a server, a lot happens on the backend. Let&rsquo;s first take a look at protocols</p>
+
+<h2>Protocols</h2>
+
+<p>Protocols are sets of rules that machines follow to complete tasks. Two of the most important protocols for the web are TCP/IP, which defines how electronic devices (like computers) should be connected over the Internet, and how data should be transmitted between them.</p>
+
+<ol>
+<li>TCP &ndash; transmission control protocol
+
+<ul>
+<li>TCP breaks down every piece of data into packets, because a webpage is too large to transfer over the Internet all at once.</li>
+</ul>
+</li>
+<li>IP is Internet protocol
+
+<ul>
+<li>IP address is specific to each device that is connected to the Internet and it is how one machine can find another machine through the network</li>
+</ul>
+</li>
+</ol>
+
+
+<p>The TCP/IP protocols are usually used together and they are basically the rules for how information is passed through the Internet. When you want to send a message or retrieve information from another computer TCP/IP is what makes this possible. One of the most common types protocols for the web is Hypertext Transfer Protocol (HTTP), which takes care of the communication between the web server and the web browser.  It is used for sending information from the client (browser) to the web server and then returning the web content back from the web server to the client.</p>
+
+<h2>Sending and Retrieving Information</h2>
+
+<p>As stated previously, when I type in google.com a request is sent to the Internet Service Provider, which routes the request to the server. It first hits the domain name server (DNS), which looks at the domain name typed in (such as www.google.com) and then searches for the correct IP address associated with that Domain Name.  The DNS will then point that request in the correct direction.   Once it hits the target server, in our case it would be the server for Google, the server will respond by sending the files back to your computer in a series of packets.  The packets are about 1000 – 1500 bytes and have header and footer telling what information is in the packet and how it fits in with the entire file, along with the IP address.  Note that the packets don&rsquo;t all follow the same path back because they are looking for the quickest route back to the client.  Routers direct the packets around the Internet helping them reach your computer.   Each router examines the destination addresses and contents of the packets it receives and then passes the packets on to another router as they make their way to their final destination (your computer). Once they get to the client TCP comes into play again and puts the packets back together based on the information stored in that packet, whether that be an image, an email message or even a tweet. HTTP helps to return the web content to the browser.  The Hypertext Markup Language (HTML), in the files, tells the Web browser how to display the page and its element and thus google.com webpage is rendered.</p>
+
+<p>So this is very basic, but it is in essence how the Internet works.  Learning this was very helpful to me and I hope that is will be of use to you.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Authored by <span class="fn">Denine Guy</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-19T15:42:12-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/internet/'>internet</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://denineguy.github.io/blog/2014/09/19/how-does-the-internet-work/" data-via="" data-counturl="http://denineguy.github.io/blog/2014/09/19/how-does-the-internet-work/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/11/the-greedy-method-solving-the-apple-stock-algorithm/" title="Previous Post: The Greedy Method - Solving the Apple Stock Algorithm">&laquo; The Greedy Method - Solving the Apple Stock Algorithm</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Denine Guy -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
