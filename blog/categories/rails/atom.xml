@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-09-19T16:16:18-04:00</updated>
+  <updated>2014-09-22T16:00:09-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -12,6 +12,473 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started With Rails]]></title>
+    <link href="http://denineguy.github.io/blog/2014/09/22/getting-started-with-rails/"/>
+    <updated>2014-09-22T10:19:58-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/09/22/getting-started-with-rails</id>
+    <content type="html"><![CDATA[<p><a href="http://guides.rubyonrails.org/">Rails</a> has rapidly become one of the most powerful frameworks for building dynamic web applications and it is written in the Ruby language. Today there are several startups that use Rails including GitHub, Shopify, Hulu,Quirky, Airbnb. There are also several web development companies that focus on Rails development, among those are Pivotal Labs and Thoughbot. One of the great things about Rails is that it is 100% open-source and as a result cost nothing to download.  The framework is designed to make building web applications easier by making assumptions about what every developer needs to get started and it allows you to write less code while accomplishing more than other languages and frameworks.</p>
+
+<!-- more -->
+
+
+<p>Rails follows two major guiding principles:</p>
+
+<ol>
+<li>DRY(Don&rsquo;t Repeat Yourself) &ndash; By not repeating the same code over and over again the code is more maintainable, extensibility and minimizes bugs</li>
+<li>Convention over Configuration &ndash; Rails believe it has created the best ways to do many things in a web application and this it follow many conventions rather than having the developer set up many configuration files.</li>
+</ol>
+
+
+<h2>Let&rsquo;s get Started</h2>
+
+<p>We are going to create a simple Blog Post. The first thing you need to do is set up your Rails environment.  You should have the following installed:</p>
+
+<ol>
+<li><a href="http://www.ocf.berkeley.edu/~kelu/interviews/questions.html">Ruby language</a></li>
+<li><a href="http://rubygems.org/">Ruby Gem&rsquo;s packaging system</a></li>
+<li><a href="http://www.sqlite.org/">SQLite3 Database</a></li>
+</ol>
+
+
+<p>Assuming that all of those have been downloaded successfully, you now need to install Rails. To install Rails you just type the following in your command line
+<code>
+  $ gem install rails
+</code>
+To ensure it is installed correctly run the following:
+<code>
+  $ bin/rails --version
+</code>
+The version should be 4.1.2 or greater</p>
+
+<p>Once your environment is completely setup it is easy to set up a new Rails app. You would enter rails new and the name of the application in the command line.  Enter the following in your command line:</p>
+
+<p><code>
+  $ rails new blog
+</code>
+Rails will automatically run bundler for you, but go to your Gemfile and add any other Gems you wish to use.  After you have added them to your file run <code>bundle install</code> in the command line. Now cd into your new application and open it in your text editor.  You will see that Rails has auto-generated a number of files and folders for you. To get a full explanation and purpose for each file and folder checkout the <a href="http://guides.rubyonrails.org/getting_started.html">Rails Guides</a> for full documentation on it.</p>
+
+<h2>Model-View-Controller</h2>
+
+<p>Rails follows the <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">model-view-controller(MVC)</a> pattern, which separates the applicaton behavior(business logic) from the input and the user interface. In our case business logic is the model for posts and comments while the user interface is the web page in the browser.</p>
+
+<p>In essence for Rails applications when a browser sends a request it is received by the web server and then passed to the Rails controller, which determines what to do next.  In some cases the controller will render a view, an HTML template that gets sent back to the server.  In most cases, however, the controller will interact with the model, a Ruby object which is a component of the site(such as a post) and it will communicate with the database. After communicating with the database the controller will step in and render a view, the web page in HTML format.</p>
+
+<p><img src="/images/mvc_image.png" title="A detailed diagram of MVC in Rails" alt="Rails MVC Diagram" /></p>
+
+<h2>Models</h2>
+
+<p>To get started we need to think about what we need for our application.  In our case we are creating a very simple blog and at a minimum we need to think about the posts for the blog and the comments. The posts should have a title and content.  The comment should have a commenter and content and post_id which is a foreign key to posts and this bascially states that the comment <code>belongs_to</code> a post.  In order to create your model you will write the following in your command line.</p>
+
+<p><code>
+  rails generate model Post title:string content:text
+  rails generate model Comment content:text post_id:integer
+</code></p>
+
+<p>Somethings to note is that model is typically singular. After you write the name of the model(your object) you define the attributes of the object by writing it in the format attribute:type, where attribute is the title and type would be string, text, integer, boolean, date. The difference between string and text is that a string is for short text input usually 255 characters or less and text is user for more input like content which could potentially be more than 255 characters. After generating the models the following should be populated.</p>
+
+<p>```
+♥ rails generate model Post title:string content:text</p>
+
+<pre><code>invoke  active_record
+create    db/migrate/20140920155246_create_posts.rb
+create    app/models/post.rb
+invoke    test_unit
+create      test/models/post_test.rb
+create      test/fixtures/posts.yml
+</code></pre>
+
+<p>[11:52:47] blog
+♥ rails generate model Comment content:text post_id:integer</p>
+
+<pre><code>invoke  active_record
+create    db/migrate/20140920155332_create_comments.rb
+create    app/models/comment.rb
+invoke    test_unit
+create      test/models/comment_test.rb
+create      test/fixtures/comments.yml
+</code></pre>
+
+<p>```</p>
+
+<p>The model is responsible for creating your post and comment models as well as your migration files for both models. Let&rsquo;s look at the migrations.  Go to the <code>db/migrate</code> folder and you will see migration files for both <code>create_post.rb</code> and <code>create_comments.rb</code> with a timestamp in front of the name of the file. These files create your Active Record migration and basically setup the structure for the database table which are essentially the attributes for each model. You will see that Rails automatically adds a timestamp which will generate the created_at and updated_at fields in your database and tell you when a record has been added or updated to the database.</p>
+
+<p>```ruby Post.rb
+class CreatePosts &lt; ActiveRecord::Migration
+  def change</p>
+
+<pre><code>create_table :posts do |t|
+  t.string :title
+  t.text :content
+
+  t.timestamps
+end
+</code></pre>
+
+<p>  end
+end  <br/>
+```</p>
+
+<p>```ruby Comment.rb
+class CreateComments &lt; ActiveRecord::Migration
+  def change</p>
+
+<pre><code>create_table :comments do |t|
+  t.string :commenter
+  t.text :content
+  t.integer :post_id
+
+  t.timestamps
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>```</p>
+
+<p>rails generate model, also creates your model files. If you go to your text editor in <code>app/models</code> you should now see a <code>post.rb</code> and <code>comment.rb</code> file. Both should look you have a class for the specific modes which inherits from ActiveRecord::Base.  In our models we need to tell Active Record how the models are associated with each other. To learn more about associations visit <a href="http://guides.rubyonrails.org/association_basics.html">Rails Active Record Association</a>.  This is how our foreign key will essentially work.  So let&rsquo;s think about this.  For any one post it is possible to have a lot of comments and a comment belongs to only one post.  We also want to make sure that a post has at least a title in order for it to be saved and a comment needs to have some content. We can do that by validating the presence of those attributes. Validations are covered in detail in <a href="http://guides.rubyonrails.org/active_record_validations.html">Rails Active Record Validations</a>.  So let&rsquo;s write the following associations in our model.</p>
+
+<p><code>ruby Post.rb
+class Post &lt; ActiveRecord::Base
+  has_many :comments
+  validates_presence_of :title
+end
+</code></p>
+
+<p><code>ruby Comment.rb
+class Comment &lt; ActiveRecord::Base
+  belongs_to :post
+  validates_presence_of :content
+end
+</code>
+Now that we have our models and table configuration set up we now need to migrate the table to actually generate the database table.  In you command line run <code>rake db:migrate</code>
+You should see that a create_table post and create_table comment were both generated. Visit <a href="http://guides.rubyonrails.org/migrations.html">Rails Database Migrations</a> for more information on Migrations</p>
+
+<p>```ruby Rake db:migrate
+♥ rake db:migrate
+== 20140920155246 CreatePosts: migrating ======================================
+&mdash; create_table(:posts)
+   &ndash;> 0.0023s
+== 20140920155246 CreatePosts: migrated (0.0024s) =============================</p>
+
+<p>== 20140920155332 CreateComments: migrating ===================================
+&mdash; create_table(:comments)
+   &ndash;> 0.0012s
+== 20140920155332 CreateComments: migrated (0.0013s) ==========================
+```</p>
+
+<p>Once your migration finishes a <code>schema.rb</code> will be generated. Go to you text editor and go to the folder <code>db\schema.rb</code>This will show the layout of your tables, which should look like the following.</p>
+
+<p>```ruby Schema.rb
+ActiveRecord::Schema.define(version: 20140920155332) do</p>
+
+<p>  create_table &ldquo;comments&rdquo;, force: true do |t|</p>
+
+<pre><code>t.string   "commenter"
+t.text     "content"
+t.integer  "post_id"
+t.datetime "created_at"
+t.datetime "updated_at"
+</code></pre>
+
+<p>  end</p>
+
+<p>  create_table &ldquo;posts&rdquo;, force: true do |t|</p>
+
+<pre><code>t.string   "title"
+t.text     "content"
+t.datetime "created_at"
+t.datetime "updated_at"
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+<code>
+Now let's see what our website looks like so far.  In the command line start your rails server by entering</code>rails s<code>. Once that runs enter</code><a href="http://localhost:3000">http://localhost:3000</a>``` in your browser and you should see the following.</p>
+
+<p><img src="/images/welcome_aboard_rails.png" title="Rails Default Information Page Welcome Aboard." alt="Rails Default Information Page" /></p>
+
+<p>In the next section we will begin to render our application in the browser</p>
+
+<h2>Controllers</h2>
+
+<p>In order to begin to render the application on the page you need at least a controller and a view. For our application we will need to create a Post Controller and a Comments Controller.
+As we discussed previously the controllers purpose is to recieve specific request from the application.  The routers purpose is to decide which controller recieves which request.  Each action&rsquo;s purpose is to collect  information to provide it to a view. A view&rsquo;s purpose is to display this information in a human readable format. View templates are written in a language called eRuby (Embedded Ruby).</p>
+
+<p>To create your controllers you need to enter <code>rails g controller Posts</code> and <code>rails g controller Comments</code>.  Notice that unlike your models which are singular your controllers are plural.</p>
+
+<p>``` ruby PostsController and CommentsController
+♥ rails g controller Posts</p>
+
+<pre><code>  create  app/controllers/posts_controller.rb
+  invoke  erb
+  create    app/views/posts
+  invoke  test_unit
+  create    test/controllers/posts_controller_test.rb
+  invoke  helper
+  create    app/helpers/posts_helper.rb
+  invoke    test_unit
+  create      test/helpers/posts_helper_test.rb
+  invoke  assets
+  invoke    coffee
+  create      app/assets/javascripts/posts.js.coffee
+  invoke    scss
+  create      app/assets/stylesheets/posts.css.scss
+</code></pre>
+
+<p>[11:25:23] (master) blog
+♥ rails g controller Comments</p>
+
+<pre><code>  create  app/controllers/comments_controller.rb
+  invoke  erb
+  create    app/views/comments
+  invoke  test_unit
+  create    test/controllers/comments_controller_test.rb
+  invoke  helper
+  create    app/helpers/comments_helper.rb
+  invoke    test_unit
+  create      test/helpers/comments_helper_test.rb
+  invoke  assets
+  invoke    coffee
+  create      app/assets/javascripts/comments.js.coffee
+  invoke    scss
+  create      app/assets/stylesheets/comments.css.scss
+</code></pre>
+
+<p><code>     
+Generating controllers will create both your controller files and your view files.  If you go to your text editor and go to app/controllers you should now see a</code>comments_controller.rb<code>and</code>posts_controller.rb``` file, which both inherit from the Application Controller. If you go to app\views you will now see folders for comments and posts.</p>
+
+<p><code>ruby posts_controller.rb
+class PostsController &lt; ApplicationController
+end
+</code></p>
+
+<p><code>ruby comments_controller.rb
+class CommentsController &lt; ApplicationController
+end
+</code></p>
+
+<h2>Routes</h2>
+
+<p>We will now add routes to our application.  Please enter the following in your <code>routes.rb</code> file.</p>
+
+<p>```ruby Routes.rb
+Rails.application.routes.draw do
+  resources :posts do</p>
+
+<pre><code>resources :comments
+</code></pre>
+
+<p>  end
+end
+```
+This creates comments as a nested resource within posts. This is another part of capturing the hierarchical relationship that exists between posts and comments. This basically states that comments will only be viewed through routes generated for posts.</p>
+
+<p>Now you can enter <code>rake routes</code> and you should see the following.
+```ruby Rake Routes
+♥ rake routes</p>
+
+<pre><code>       Prefix Verb   URI Pattern                                 Controller#Action
+post_comments GET    /posts/:post_id/comments(.:format)          comments#index
+              POST   /posts/:post_id/comments(.:format)          comments#create
+</code></pre>
+
+<p> new_post_comment GET    /posts/:post_id/comments/new(.:format)      comments#new
+edit_post_comment GET    /posts/:post_id/comments/:id/edit(.:format) comments#edit</p>
+
+<pre><code> post_comment GET    /posts/:post_id/comments/:id(.:format)      comments#show
+              PATCH  /posts/:post_id/comments/:id(.:format)      comments#update
+              PUT    /posts/:post_id/comments/:id(.:format)      comments#update
+              DELETE /posts/:post_id/comments/:id(.:format)      comments#destroy
+        posts GET    /posts(.:format)                            posts#index
+              POST   /posts(.:format)                            posts#create
+     new_post GET    /posts/new(.:format)                        posts#new
+    edit_post GET    /posts/:id/edit(.:format)                   posts#edit
+         post GET    /posts/:id(.:format)                        posts#show
+              PATCH  /posts/:id(.:format)                        posts#update
+              PUT    /posts/:id(.:format)                        posts#update
+              DELETE /posts/:id(.:format)                        posts#destroy
+</code></pre>
+
+<p>```</p>
+
+<p>The below graphic represents the implementation of the REST architecture in Rails and explains the URL, the controller action and purpose of each RESTful route.</p>
+
+<p><img src="/images/routes_rest.png" title="Rails RESTful Routes Table." alt="Rails RESTful Routes Table" /></p>
+
+<p>The root directory or home page will appear on localhost:3000.  To set the root directory to a view other than the default root directory, use  root :to => &lsquo;Controller#action&rsquo;.  You can set the root directory as a separtate landing page but for our application we will set the posts index page as the root directory by entering root :to => &ldquo;posts#index&rdquo; in  routes.rb.</p>
+
+<p>```ruby Routes.rb
+Rails.application.routes.draw do</p>
+
+<p>  root :to => &ldquo;posts#index&rdquo;</p>
+
+<p>  resources :posts do</p>
+
+<pre><code>resources :comments
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+<code>
+In order to see anything on localhost:3000 we will now need to create our post#index view.  We do this by creating and</code>index.html.erb<code>file in the app/views/posts folder. In this view we will render all of our posts. We will use embedded ruby.  For now lets just write the following in the</code>index.html.erb``` file</p>
+
+<p>```</p>
+
+<h1>All Blog Posts</h1>
+
+
+<p>```
+if you go to localhost:3000 you should now see All Blog Posts displayed on your root page.</p>
+
+<h2>CRUD Post and Comment Controllers</h2>
+
+<p>We now need to completely set up our controllers so that we can add, edit, show and delete post and be able to create a comment. We will take care of these actions in our controller which will allow us to collect information and display the information in the view.  I will show what should go into each section and explain what it does and what view it will render.</p>
+
+<p>Your Posts Controller should look like the following</p>
+
+<p>```ruby posts_controller.rb
+class PostsController &lt; ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]</p>
+
+<p>  # GET/posts
+  # posts/index.html.erb which displays all posts
+  def index</p>
+
+<pre><code>@posts = Post.all
+</code></pre>
+
+<p>  end</p>
+
+<p>  # GET /posts/new
+  # posts/new.html.erb which shows and HTML form to create a new post
+  def new</p>
+
+<pre><code>@post = Post.new
+</code></pre>
+
+<p>  end</p>
+
+<p>  # POST /posts
+  # posts/index.html.erb<br/>
+  # This saves information to the database after after new post is created from new.html.erb
+  # redirects to index page where new post will appear
+  def create</p>
+
+<pre><code>@post = Post.new(post_params)
+
+if @post.save
+  redirect_to @post, notice: 'Post was successfully created.'
+else
+  render :new 
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # GET /posts/1 <br/>
+  #posts/show.html.erb
+  # this will show an individual post for an newly created or updated post
+  # will also contain the comment form to create a new comment and show comments
+  def show</p>
+
+<pre><code>@comment = Comment.new
+</code></pre>
+
+<p>  end</p>
+
+<p>  # GET /posts/1/edit <br/>
+  # edit.html.erb
+  # This is an HTML form for editing a post
+  def edit
+  end</p>
+
+<p>  # PATCH/PUT /posts/1
+  # posts/show.html.erb
+  # save the information from edit.html.erb to the database and updates a specific post
+  # it will then render the show.html.erb page
+  def update</p>
+
+<pre><code>respond_to do |format|
+  if @post.update(post_params)
+    format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+    format.json { render :show, status: :ok, location: @post }
+  else
+    format.html { render :edit }
+    format.json { render json: @post.errors, status: :unprocessable_entity }
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  # DELETE /posts/1
+  # posts/show.html.erb
+  # The deletes a specific post and removes it from the database
+  def destroy</p>
+
+<pre><code>@post.destroy
+respond_to do |format|
+  format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+  format.json { head :no_content }
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<pre><code># Use callbacks to share common setup or constraints between actions.
+def set_post
+  @post = Post.find(params[:id])
+end
+
+# Strong parameters, to only allow specific attributes to be updated and saved to database.
+def post_params
+  params.require(:post).permit(:title, :content)
+end
+</code></pre>
+
+<p>end
+```</p>
+
+<p>Your Comments Controllers you should look like the following.  This will allow you to create a new comment and save it to the database and redirect you the comment for that post.</p>
+
+<p>```ruby comments_controller.rb
+def create</p>
+
+<pre><code>@post = Post.find(params[:post_id])
+@comment = @post.comments.build(comment_params)
+
+if @comment.save
+  redirect_to @comment.post
+else
+  redirect_to :back
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<pre><code>def comment_params
+  params.require(:comment).permit(:commenter, :content)
+end
+</code></pre>
+
+<p>```</p>
+
+<h2>Views</h2>
+
+<p>Now that the controllers and routes have been set up for the Posts and Comments the only thing
+left to do now is to set up the view.  As stated before we will use the embedded ruby to create
+the templates for all of the views that correspond to the controller actions.  You can see all of the views in the <a href="https://github.com/denineguy/blog">GitHub Repository</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Industry Trends and Top Companies Using Ruby on Rails]]></title>
