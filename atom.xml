@@ -4,7 +4,7 @@
   <title><![CDATA[Riding the Rails and Searching for Gems]]></title>
   <link href="http://denineguy.github.io/atom.xml" rel="self"/>
   <link href="http://denineguy.github.io/"/>
-  <updated>2014-09-22T16:00:09-04:00</updated>
+  <updated>2014-10-13T20:37:09-04:00</updated>
   <id>http://denineguy.github.io/</id>
   <author>
     <name><![CDATA[Denine Guy]]></name>
@@ -12,6 +12,395 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript: Ajax Basics and JSON]]></title>
+    <link href="http://denineguy.github.io/blog/2014/10/13/javascript-ajax-basics-and-json/"/>
+    <updated>2014-10-13T10:24:06-04:00</updated>
+    <id>http://denineguy.github.io/blog/2014/10/13/javascript-ajax-basics-and-json</id>
+    <content type="html"><![CDATA[<p>Ajax is a technique the lets you request data from a web server, update content on a web page without loading a new page and post data to web server without refreshing the page.  The data is often sent in a format called JavaScript Object Notation (or JSON).</p>
+
+<!-- more -->
+
+
+<h2>What is Ajax</h2>
+
+<p>Have you ever been on a website and begin to type in a word and it autocompletes for you? Have you ever shopped online and added an item to your cart and noticed the cart is updated with out leaving the page?  Maybe you have completed a registration form online and it lets you know whether it was completed successfully without refreshing the page or even checks to see if a username has been taken before submitted the for.  Have you ever used Twitter or Facebook? Do you notice how you are able to post a message or tweet and see other message or tweets without the page refreshing?  All of this happens with the magic of Ajax.</p>
+
+<p>Ajax stands for Asynchronous JavaScript and XML, which has actually been around since 1999 but was referred to back then as XMLHttpRequest Object.  JavaScript is the programming language that makes Ajax happen in that it sends a request, gets a response and updates content asynchronously. The asynchronous processing model means that a user can do other things on the website with the browser is waiting for the data to load on the page, allowing for a better user experience.</p>
+
+<h2>Why use Ajax?</h2>
+
+<p>Typically when a browser comes across a <code>&lt;script&gt;</code> tag, it will stop processing the rest of the page until it has loaded the script.  This is a synchronous processing model.  If a page is loading and has to wait to collect data from the server it also has to not only wait for the script to be loaded and processed but it also has to wait for the server to send the data (the response) that the script is going to display.</p>
+
+<p>With Ajax the browser can request something from the server and while it is waiting a response, the rest of the page can still load allowing the user to still interact with the web page. This is an asynchronous processing model and the beauty of Ajax.  When the response comes back you want to update the page with the new information.  Typically this would be done with refreshing and loading a whole new page.  With Ajax it allows you to just update a specific part of the page with content, by utilizing an event handler and requesting the content from the server with an asynchronous request.  Meanwhile the user can continue to interact with the web page and will thus allow the data to load faster.</p>
+
+<h2>How Ajax Works</h2>
+
+<p>As stated before Ajax is really and XMLHttpRequest Object (XHR).  It is the process of using JavaScript to send a request to the web server, get a response from the server and then update the content on the web page with that response.   A user can continue interacting with the browser until a response is ready to comeback at which point and event is fired and JavaScript calls a function which then updates the content on the page.</p>
+
+<p>You can break the Ajax processing into four parts
+1. Create an XMLHttpRequest Object
+2. Define a Callback Function
+3. Open a Request
+4. Send a request</p>
+
+<p>Let look how you handle requests and responses</p>
+
+<figure class='code'><figcaption><span>Request using the XMLHttpRequest</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// code to process results from the server;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>  <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/students.json&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s discuss every aspect of this request and the response</p>
+
+<h3>The Request</h3>
+
+<ol>
+<li><code>var xhr = new XMLHttpRequest();</code>: creates an instance of the XMLHttpRequest Object using the new keyword and stores that instance in a variable. You can name the variable whatever you like in our case we named it xhr, which is the abbreviation for the XMLHttpRequest.</li>
+<li><code>xhr.open('GET', '../data/students.json');</code>: this method prepares the request and it takes two required parameters:
+
+<ol>
+<li>The HTTP Method usually a GET or a POST.
+
+<ul>
+<li>GET Request &ndash; Used when wanting to receive information from a database or server.</li>
+<li>POST Request &ndash; Used when wanting to save information, save from a form, to a database.</li>
+</ul>
+</li>
+<li>The url of the page that will handle the request.</li>
+</ol>
+</li>
+<li><code>xhr.send();</code>: is the method that sends the request to the server.</li>
+</ol>
+
+
+<h3>javascript The Response &ndash; The Callback</h3>
+
+<figure class='code'><figcaption><span>Response using the XMLHttpRequest</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="err">`</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// code to process results from the server;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the callback function and it is the programming you want to run when the server sends back its response.</p>
+
+<ol>
+<li><code>xhr.onreadystatechange = function ()</code>: In our example the callback sends back a readystatechange.  When the browser has received and loaded a response from the server the onreadystatechange will fire and trigger a function.</li>
+<li><code>if(xhr.readyState === 4 &amp;&amp; xhr.status === 200)</code>:  Once the request/response goes through many changes before it is ready to comeback to the browser.  Once it hits a readyState of <strong>4</strong> the web server has sent back everything it is going to send.  The response also has a statusText, which lets us know if the status came back successfully. We ultimately want a status code of 200-&lsquo;OK&rsquo; before content is loaded on the page, but there are several status that the response can come back as:
+
+<ol>
+<li>2xx &ndash; Success, 200 &ndash; OK</li>
+<li>3xx &ndash; Redirection</li>
+<li>4xx &ndash; Client Error, most common 404 &ndash; File not found</li>
+<li>5xx &ndash; Server Error
+The Internet Assigned Numbers Authority (IANA) maintains a complete list of <a href="http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">HTTP Status Codes</a></li>
+</ol>
+</li>
+</ol>
+
+
+<h2>Data Formats</h2>
+
+<p>The response (callback) to the request can come back in one of three formats HTML, XML or JSON.   The format in which you receive information back is important because you could receive a lot of information back and you want to ensure you have a good data structure in place in order to utilize the data to display on the page
+* HTML: Hypertext Markup Language &ndash; The simplest way to get data into a page
+* XML: Extensible Markup Language &ndash; which is very similar to HTML but uses its own tags names to describe the data it contains
+* JSON: JavaScript Object Notation &ndash; uses syntax like object literal notation to represent data</p>
+
+<p>For the purposes of this blog we are going to focus on JSON, which is more concise than HTML/XML and is commonly used with JavaScript.</p>
+
+<h2>JSON: JavaScript Object Notation</h2>
+
+<p>JSON data looks a lot like object notation, but it isn&rsquo;t an object it is plain text.  The object notation consists of key and values.</p>
+
+<ul>
+<li>The object notation is placed in curly brackets <code>{}</code></li>
+<li>Keys &ndash; or name is placed in double quotes and is separated by the value with a colon.</li>
+<li>Values &ndash; can be any of the following data types: string, number, boolean, array, object</li>
+<li>The key/value pairs are separated by commas.</li>
+</ul>
+
+
+<p>This is an example of Object Notation</p>
+
+<figure class='code'><figcaption><span>JSON Object Notation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="p">{</span>
+</span><span class='line'>   <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Amy&quot;</span><span class="p">,</span>
+</span><span class='line'>   <span class="s2">&quot;registered&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>   <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">15</span>
+</span><span class='line'>  <span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>JSON can also be written in Array Notation in which we can have an array called <strong>students</strong> and we can have say a series of students in object notation.</p>
+
+<ul>
+<li>The array uses square bracket notation</li>
+<li>The array holds several objects</li>
+</ul>
+
+
+<p>This is an example of Array Notation</p>
+
+<figure class='code'><figcaption><span>JSON Array Notation</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="s2">&quot;students&quot;</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>     <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Amy&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;registered&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">15</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>     <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Amber&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;registered&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">12</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>     <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Bojana&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;registered&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'>     <span class="s2">&quot;age&quot;</span><span class="o">:</span> <span class="mi">13</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> As stated earlier JSON is really just string of plain text.  In order for JavaScript to use the data we need to format it into an object. <code>JSON.parse()</code> will convert a string of JSON data into a JavaScript objects ready for the browser to use and then we store it into a variable <code>var students</code>.  The HTML added using the innerHTML property. We will first create a variable <code>var statusHTML</code> which will store the HTML data. Because we are bringing back an array of objects we will need to loop through the object to access the data using dot notation. The contents of the object are added to <strong>statusHTML</strong> variable. When the loop has finished the stuents objects, the new HTML is added to the page using the inner HTML property.</p>
+
+<p>This is a full example of Loading JSON with Ajax. In this example we are taking an array of students and determining if they have registered for a class. If they have registered it will be false if they have not registered it will be true.  We will show a yes button if registered and a no button if not registered.</p>
+
+<figure class='code'><figcaption><span>Loading JSON with Ajax-Student Registration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>                   <span class="c1">//Create XMLHttpRequest object</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>            <span class="c1">//When readystate changes </span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//If readyState is 4 and status ok</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">students</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//Build up the string with statusHTML</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">statusHTML</span> <span class="o">=</span> <span class="s1">&#39;&lt;ul class=&quot;bulleted&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">students</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//Loop through the Object</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">students</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">registered</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">statusHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li class=&quot;yes&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">statusHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li class=&quot;no&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nx">statusHTML</span> <span class="o">+=</span> <span class="nx">students</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">statusHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="nx">statusHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//Update the page with new contenct</span>
+</span><span class='line'>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;studentList&#39;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">statusHTML</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/students.json&#39;</span><span class="p">);</span>        <span class="c1">//Prepare the request</span>
+</span><span class='line'><span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>                                      <span class="c1">//Send the request</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to see the full code for this please visit my Git Repository <a href="https://github.com/denineguy/ajax_basics">Ajax Basics</a>. Remember you will need this on a server in order like localhost:3000 in order for this to work.</p>
+
+<h2>jQuery and Ajax</h2>
+
+<h3>jQuery and Ajax Requests</h3>
+
+<p>jQuery provides several methods to handle Ajax requests.  Below are 6 methods</p>
+
+<ul>
+<li>.load()       Loads HTML fragments into an element and is the simplest method for retrieving data.</li>
+<li>$.get()       Loads data using the HTTP GET method and is used to request data from a server or get retrieve data from a database</li>
+<li>$.post()      Loads data using the HTTP POST method and is used to send data to a server and exampler would be storing data from a submitted form to a database.</li>
+<li>$.getJSON()   Loads JSON data using a GET request Used for JSON data.</li>
+<li>$.getScript() Loads and executes JavaScript data using GET.</li>
+<li><p>$.ajax()      This method is used to perform all requests.
+There are a few reasons you would use $.ajax() method over the $.get() or $.post()methods</p></li>
+<li><p>The $.ajax() method has more options and provides greater control over Ajax requests</p></li>
+<li>The method lets you set a timeout to control how long you are willing to wait for a response from the server</li>
+<li>The method lets you send a username + password to resources that require user authentication.</li>
+</ul>
+
+
+<p>You can see a list of the requests on the <a href="http://api.jquery.com/category/ajax/shorthand-methods/">jQuery API Documentation</a>
+and a comparison of the different request at this <a href="https://spreadsheets.google.com/pub?key=t9C9vnWDA-4oD1tWPChDmCQ&amp;output=html">Comparison Table</a></p>
+
+<h3>jQuery and Ajax Responses</h3>
+
+<p>With The .load() method, the HTML returned from the server is directly inserted into the jQuery selection.  Below is an example of this</p>
+
+<figure class='code'><figcaption><span>Ajax $.load() Method</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">sendAjax</span><span class="p">(){</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#ajax&#39;</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;sidebar.html&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is the shorthand notation that loads the contents from sidebar.html into an HTML element with and ID of ajax. For other methods aside from the .load() method, utilize the jqXHR object to specify what should be done when the data is returned. Below are JQXHR Properties</p>
+
+<ul>
+<li>responseText &ndash;          Text-based data returned</li>
+<li>responseXML &ndash;           XML data returned</li>
+<li>status &ndash;                Status code</li>
+<li>statusText &ndash;            Status description (typically used to display information about an error if one occurs)</li>
+</ul>
+
+
+<h2>The jQuery Ajax Shorthand methods</h2>
+
+<h3>GET Method Request</h3>
+
+<p>The structure of the GET method is as follows <code>$.get(url, data, callback)</code></p>
+
+<ul>
+<li><em>url</em> &ndash; specifies where the data is coming from</li>
+<li><em>data</em> &ndash; provides any extra information to send to the server.</li>
+<li><em>callback</em> &ndash; indicated that the function should be called when data is returned.</li>
+</ul>
+
+
+<p>The get method could be used instead of the .load() method used above</p>
+
+<figure class='code'><figcaption><span>Ajax $.GET() Method</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;sidebar.html&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">//in this case there is no data </span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#ajax&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>POST Method request</h3>
+
+<p>Like the GET method the structure of the POST method is the same <code>$.post(url, data, callback)</code>
+In the below we are going to look at submitting a form to a data base</p>
+
+<figure class='code'><figcaption><span>POST Method: Submitting a Form</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>                  <span class="c1">//JavaScript doesn&#39;t until page loaded</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>                  <span class="c1">//Submits the Form</span>
+</span><span class='line'>    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>                           <span class="c1">//Prevents new page load when form submitted </span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;action&quot;</span><span class="p">);</span>             <span class="c1">//post action by clicking the submit button</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">serialize</span><span class="p">();</span>               <span class="c1">//captures the data entered in form fields</span>
+</span><span class='line'>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span><span class="nx">data</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>          <span class="c1">// Post Method and callback function</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#signup&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Thanks for signing up!&lt;/p&gt;&quot;</span><span class="p">)</span>   <span class="c1">//Replaces the html</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span> <span class="c1">// end ready</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s dissect this code.</p>
+
+<ol>
+<li><code>$(document).ready(function()</code> is needed when you put the script tags at the top of your index.html file.  It prevents the javaScript from running until the page is load.</li>
+<li><code>e.preventDefault();</code> is a method used to stop the form from submitting and going to another page.</li>
+<li><code>.serialize()</code> is a method used to capture the name and attributes of the form. The puts information in a nice format in order to send the data to the server and store  it in the database.</li>
+<li><code>$.post(url,data,function(response)</code> This is the POST method Ajax request that request information from the server and once complete brings back a response to be loaded to the page</li>
+<li><code>$('#signup').html("&lt;p&gt;Thanks for signing up!&lt;/p&gt;"</code> This is the HTML that will be loaded on the page.</li>
+</ol>
+
+
+<p>To understand this more or to see more of this code you can visit my GITHUB Repo <a href="https://github.com/denineguy/ajax_jquery/tree/master">jQuery Ajax</a>, but I highly recommend going through the Ajax tutorial on <a href="http://teamtreehouse.com/library/ajax-basics">TeamTreehouse</a>.  This specific example and several other demonstrated in this blog are on that tutorial and really helped me learn the material.  Go through it in detail and it will discuss more about the jQuery Ajax methods and error handling. For a full list of the jQuery Ajax Shorthand methods visit the <a href="http://api.jquery.com/category/ajax/">jQuery API Documentation</a></p>
+
+<h2>Ajax Limitations</h2>
+
+<p>One big limitation of Ajax is that works great with data from your own server but for security reasons &ndash; browsers don&rsquo;t load Ajax responses from other domains.  You will have trouble doing the following</p>
+
+<ul>
+<li>Requesting data from another site</li>
+<li>Switching ports &ndash; You can&rsquo;t switch from port 80 to port 8888</li>
+<li>Switching host &ndash; You can&rsquo;t go from www.myblog.com to db.myblog.com</li>
+</ul>
+
+
+<p>There are 3 workarounds however that will allow you to receive Ajax responses from other domains.</p>
+
+<ol>
+<li>Web Proxy – in which you create a file on your server that collect data from the remote server using a server side language like (Ruby, PHP, Node.js etc.).  The other pages on your site then request the data from the file on your site.  This is called a proxy.</li>
+<li>JSONP &ndash; This is JSON with padding which involves adding <code>&lt;script&gt;&lt;/script&gt;</code> into the page which will load the JSON data from another server.</li>
+<li>CORS &ndash; CORS is Cross Origin Resource Sharing, which involves adding extra information to the HTTP headers to let the browser and server know that they should be communicating with each other.  CORS is a W3C specification but is only supported by the most recent browsers.</li>
+</ol>
+
+
+<p>I hope this has been helpful for you.  In my next blog post on Ajax, I will discuss how you can use APIs using Ajax.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting Started With Rails]]></title>
